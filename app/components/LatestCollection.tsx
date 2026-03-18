@@ -18,10 +18,10 @@ export default function LatestCollection() {
   useEffect(() => {
     axios.get("/api/products")
       .then(res => {
-        console.log(res.data); // лог внутри then
+        console.log(res.data);
         setProducts(res.data);
       })
-      .catch(err => console.error(err)); // catch прямо на цепочке
+      .catch(err => console.error(err));
   }, []);
 
   return (

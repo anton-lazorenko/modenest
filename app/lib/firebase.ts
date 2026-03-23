@@ -2,8 +2,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// Конфиг берём из переменных окружения (.env.local)
-// Убедись, что .env.local лежит в корне проекта и перезапустил dev-сервер
+
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY!,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN!,

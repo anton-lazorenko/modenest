@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "../../lib/firebase";
 
 interface Props {
   params: Promise<{ id: string }>;

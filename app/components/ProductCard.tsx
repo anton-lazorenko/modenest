@@ -16,7 +16,7 @@ export default function ProductCard({
   href = "#",
 }: ProductCardProps) {
   return (
-    <div className="bg-white rounded-2xl w-64 overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
+    <div className="bg-white max-h-[420px] rounded-2xl w-64 overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group">
 
       {/* Изображение */}
       <Link href={href} className="block relative w-full h-64">

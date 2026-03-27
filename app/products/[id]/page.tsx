@@ -1,60 +1,47 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../lib/firebase";
-
-interface Props {
-  params: Promise<{ id: string }>;
-}
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Image from "next/image";
 
 interface Product {
   id: string;
   title: string;
   price: number;
-  inStock: boolean;
-  colors?: string[];
-  sizes?: string[];
   image?: string;
-  description?: string;
+  inStock?: boolean;
 }
 
-export default function ProductPage({ params }: Props) {
-  const { id } = use(params); // распаковываем Promise
-
+export default function ProductPage() {
+  const params = useParams();
+  const { id } = params;
   const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchProduct() {
-      const docRef = doc(db, "products", id);
-      const docSnap = await getDoc(docRef);
+    if (!id) return;
+    fetch("/api/products")
+      .then(res => res.json())
+      .then((data: Product[]) => {
+        const found = data.find(p => p.id === id);
+        setProduct(found || null);
+      });
+  }, [id]);
 
-      if (!docSnap.exists()) {
-        setProduct(null);
-      } else {
-        setProduct({ id: docSnap.id, ...(docSnap.data() as Omit<Product, "id">) });
-      }
-
-      setLoading(false);
-    }
-
-    fetchProduct();
-  }, [id]); // используем распакованный id
-
-  if (loading) return <div>Загрузка...</div>;
-  if (!product) return <div>Товар не найден</div>;
+  if (!product) return <div className="p-4">Товар не найден</div>;
 
   return (
-    <div className="max-w-[1440px] flex gap-8 mx-auto mt-48">
-      <img src={product.image} alt={product.title} className="max-w-[500px] h-auto mb-6" />
-      <div className=" flex flex-col gap-2">
-        <h1 className="text-2xl font-bold mb-4">{product.title}</h1>
-        <p>Price: ${product.price}</p>
-        <p>In stock: {product.inStock ? "Yes" : "No"}</p>
-        <p>Colors: {product.colors?.join(", ")}</p>
-        <p>Sizes: {product.sizes?.join(", ")}</p>
-        <p>Description: {product.description}</p>
+    <div className="mt-32 max-w-[1440px] mx-auto flex flex-row gap-8">
+      {product.image && <Image
+        src={product.image?.trimEnd() || "/images/default.jpg"}
+        alt={product.title}
+        width={400}
+        height={400}
+        className="mb-4 object-contain"
+      />}
+      <div className="flex flex-col gap-4">
+        <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
+        <p className="text-lg mb-2">Цена: {product.price} грн</p>
+        <p>В наличии: {product.inStock ? "Да" : "Нет"}</p>
       </div>
     </div>
   );

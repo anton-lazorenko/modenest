@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import HeaderUserDropdown from "../components/HeaderUserDropdown";
 import { Heart, Scale, ShoppingCart } from "lucide-react";
+import SearchInput from "./SearchInput";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,7 +30,7 @@ export default function Header() {
         <div className="text-2xl font-bold">
           <Link href="/">ModeNest</Link>
         </div>
-
+        <SearchInput />
         {/* Навигация */}
         <nav className="flex items-center space-x-6">
           <div className="relative group">

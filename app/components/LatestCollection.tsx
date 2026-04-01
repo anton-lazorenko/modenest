@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
 import SidebarFilters from "./SidebarFilters";
+import ProductSkeleton from "./ProductSkeleton";
 import { Timestamp } from "firebase/firestore";
 
 export interface Product {
@@ -43,7 +44,6 @@ export default function LatestCollection() {
   const [currentPage, setCurrentPage] = useState(1);
 
   if (error) return <div>Error loading products</div>;
-  if (isLoading) return <div>Loading...</div>;
 
   // Фильтрация
   const filteredProducts = products
@@ -78,16 +78,22 @@ export default function LatestCollection() {
         {/* Товары */}
         <div className="flex flex-col flex-1">
           <div className="flex flex-wrap gap-4">
-            {paginatedProducts.map(product => (
-              <ProductCard
-                key={product.id}
-                title={product.title}
-                price={`$${product.price}`}
-                imageSrc={product.image}
-                href={`/products/${product.id}`}
-              />
-            ))}
-            {paginatedProducts.length === 0 && <p className="text-gray-500">No products found.</p>}
+            {isLoading
+              ? Array.from({ length: 8 }).map((_, i) => <ProductSkeleton key={i} />)
+              : paginatedProducts.map(product => (
+                <ProductCard
+                  key={product.id}
+                  title={product.title}
+                  price={`$${product.price}`}
+                  imageSrc={product.image}
+                  href={`/products/${product.id}`}
+                />
+              ))
+            }
+
+            {!isLoading && paginatedProducts.length === 0 && (
+              <p className="text-gray-500">No products found.</p>
+            )}
           </div>
 
           {/* Пагинация */}

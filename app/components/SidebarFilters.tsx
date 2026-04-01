@@ -1,13 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
-interface Product {
-  category: string;
-  colors: string[];
-  sizes: string[];
-  gender: string;
-}
+import { Product } from "./LatestCollection";
 
 interface SidebarFiltersProps {
   products: Product[];
@@ -25,13 +19,11 @@ export default function SidebarFilters({ products, onFilterChange }: SidebarFilt
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
 
-  // Сбор уникальных значений из продуктов
   const categories = Array.from(new Set(products.map(p => p.category)));
   const colors = Array.from(new Set(products.flatMap(p => p.colors)));
   const sizes = Array.from(new Set(products.flatMap(p => p.sizes)));
   const genders = Array.from(new Set(products.map(p => p.gender)));
 
-  // Коллбэк на любое изменение фильтра
   useEffect(() => {
     onFilterChange({
       category: selectedCategories,
@@ -46,7 +38,12 @@ export default function SidebarFilters({ products, onFilterChange }: SidebarFilt
     else setList([...list, item]);
   };
 
-  const renderCheckboxes = (items: string[], selected: string[], setSelected: (v: string[]) => void, prefix: string) =>
+  const renderCheckboxes = (
+    items: string[],
+    selected: string[],
+    setSelected: (v: string[]) => void,
+    prefix: string
+  ) =>
     items.map(item => (
       <label key={`${prefix}-${item}`} className="flex items-center gap-2">
         <input

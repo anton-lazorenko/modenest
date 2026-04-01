@@ -17,10 +17,3 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 // Firestore экспортируем
 export const db = getFirestore(app);
-
-// Лог для проверки (будет в терминале)
-console.log("FIREBASE CONFIG LOADED:", {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-});

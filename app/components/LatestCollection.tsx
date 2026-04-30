@@ -66,7 +66,7 @@ export default function LatestCollection() {
 
   return (
     <section className="py-24 container mx-auto px-6 md:px-12 text-left">
-      <h2 className="text-3xl md:text-5xl font-bold mb-6 text-indigo-600">Our Latest Collection</h2>
+      <h2 className="text-3xl md:text-5xl font-bold mb-6 text-amber-700">Our Latest Collection</h2>
       <p className="text-lg md:text-xl text-gray-700 max-w-2xl">
         Explore our newest arrivals and find the perfect style for you.
       </p>
@@ -102,7 +102,7 @@ export default function LatestCollection() {
               <button
                 onClick={() => goToPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-4 py-2 bg-indigo-600 text-white rounded disabled:opacity-50"
+                className="px-4 py-2 bg-amber-700 text-white rounded disabled:opacity-50"
               >
                 Prev
               </button>
@@ -112,7 +112,7 @@ export default function LatestCollection() {
               <button
                 onClick={() => goToPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 bg-indigo-600 text-white rounded disabled:opacity-50"
+                className="px-4 py-2 bg-amber-700 text-white rounded disabled:opacity-50"
               >
                 Next
               </button>

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useDebounce } from "../hooks/useDebounce";
 import { useSearch, Product } from "../hooks/useSearch";
 import { useRouter } from "next/navigation";
+import { Search } from "lucide-react";
 
 export default function SearchInput() {
   const [query, setQuery] = useState("");
@@ -24,7 +25,6 @@ export default function SearchInput() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Переход на страницу поиска
   const handleSearch = () => {
     if (!query) return;
     setIsOpen(false);
@@ -36,7 +36,7 @@ export default function SearchInput() {
       <div className="flex">
         <input
           type="text"
-          placeholder="Поиск товаров..."
+          placeholder="Search..."
           value={query}
           onChange={e => {
             setQuery(e.target.value);
@@ -45,13 +45,13 @@ export default function SearchInput() {
           onKeyDown={e => {
             if (e.key === "Enter") handleSearch();
           }}
-          className="w-full border rounded-l px-2 py-1"
+          className="w-full border rounded-3xl p-3 appearance-none outline-none focus:appearance-none focus:outline-none border-amber-100 placeholder:text-amber-100/60"
         />
         <button
           onClick={handleSearch}
-          className="bg-gray-200 px-3 rounded-r hover:bg-gray-300"
+          className="px-3 rounded-3xl border border-amber-100 bg-amber-100"
         >
-          🔍
+          <Search className="text-amber-700" />
         </button>
       </div>
 

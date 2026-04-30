@@ -21,33 +21,32 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 p-4 transition-all duration-300
-        ${scrolled ? "bg-white shadow-md text-black" : "bg-white/60 text-black"}
+        ${scrolled ? "bg-amber-700 shadow-md text-amber-100" : "bg-white/60 text-black"}
       `}
     >
       <div className="max-w-[1440px] mx-auto flex items-center justify-between h-16">
 
-        {/* Логотип */}
         <div className="text-2xl font-bold">
           <Link href="/">ModeNest</Link>
         </div>
         <SearchInput />
-        {/* Навигация */}
         <nav className="flex items-center space-x-6">
           <div className="relative group">
             <button className="hover:opacity-80">
               Categories
             </button>
 
-            <div className="absolute right-0 top-full w-40 bg-white shadow-lg rounded-lg opacity-0 group-hover:opacity-100
-                      pointer-events-none group-hover:pointer-events-auto z-50 transition-opacity">
+            <div className={`absolute right-0 top-full w-40 shadow-lg rounded-lg opacity-0 group-hover:opacity-100
+          pointer-events-none group-hover:pointer-events-auto z-50 transition-opacity
+          ${scrolled ? "bg-amber-700 text-amber-100" : "bg-white text-black"}`}>
               <ul>
-                <li className="px-4 py-2 hover:bg-gray-100">
+                <li className={`px-4 py-2 ${scrolled ? "hover:bg-amber-600" : "hover:bg-gray-100"}`}>
                   <Link href="/category/men">For Him</Link>
                 </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
+                <li className={`px-4 py-2 ${scrolled ? "hover:bg-amber-600" : "hover:bg-gray-100"}`}>
                   <Link href="/category/women">For Her</Link>
                 </li>
-                <li className="px-4 py-2 hover:bg-gray-100">
+                <li className={`px-4 py-2 ${scrolled ? "hover:bg-amber-600" : "hover:bg-gray-100"}`}>
                   <Link href="/category/kids">For Kids</Link>
                 </li>
               </ul>
@@ -59,7 +58,6 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Иконки */}
         <div className="flex items-center space-x-4">
           <button className="p-4 hover:bg-gray-200/30 rounded-full">
             <ShoppingCart />
@@ -70,8 +68,7 @@ export default function Header() {
           <button className="p-4 hover:bg-gray-200/30 rounded-full">
             <Heart />
           </button>
-
-          <HeaderUserDropdown />
+          <HeaderUserDropdown scrolled={scrolled} />
         </div>
       </div>
     </header>

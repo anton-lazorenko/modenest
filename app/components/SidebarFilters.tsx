@@ -69,7 +69,7 @@ export default function SidebarFilters({ products, onFilterChange }: SidebarFilt
         <h3 className="font-semibold text-lg">Filters</h3>
         <button
           onClick={clearFilters}
-          className="text-sm text-indigo-600 hover:underline"
+          className="text-sm text-amber-700 hover:underline"
         >
           Clear
         </button>

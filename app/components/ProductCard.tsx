@@ -37,11 +37,11 @@ export default function ProductCard({
 
       {/* Контент */}
       <div className="p-4 flex flex-col gap-2">
-        <h3 className="text-lg font-semibold text-gray-800">
+        <h3 className="text-lg font-medium text-gray-800">
           {title}
         </h3>
 
-        <p className="text-indigo-600 font-bold text-md">
+        <p className="text-amber-700 font-bold text-lg">
           {price}
         </p>
         <Link href={href}>
